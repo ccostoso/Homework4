@@ -1,0 +1,75 @@
+/* Universal Styles */
+
+html, body {
+    height: 100%;
+}
+
+.header-title {
+    font-weight: 300;
+}
+
+.char-sprite {
+    transform: scale(2, 2);
+    padding: 1rem 0
+}
+
+/* Jumbotron styles */
+
+.jumbotron-fluid {
+    padding: 0;
+    height: 100vh;
+    margin: 0 auto;
+    background-image: url("../media/images/background.jpg");
+    background-position: center;
+    background-attachment: f;
+}
+
+.jumbotron-fluid .header-title {
+    display: inline;
+    padding: .5em;
+    border-radius: 5px;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Navbar Styles */
+
+nav {
+    background-color: rgba(255, 184, 61, 0.9);
+}
+
+.navbar-brand, a.nav-link.active {
+    font-weight: 300;
+}
+
+/* Character Select Window Styles */
+
+#character-select {
+    display: none;
+}
+
+.card {
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 5px;
+}
+
+.card .card-header {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card .card-body {
+    background-color: rgba(0, 0, 0, 0.33);
+}
+
+/* Battle Window Styles */
+
+#battle-window {
+    display: none;
+}
+
+/* Footer */
+
+footer {
+    background-color: rgba(61, 200, 255, 0.9);
+}
