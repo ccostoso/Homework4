@@ -1,6 +1,6 @@
 // Create game variables
 var isPlaying;
-var charSelected;
+var isCharSelected;
 var charArr = [];
 
 // Create character objects
@@ -8,9 +8,12 @@ class Character {
     constructor(name, HP, AP, CAP, imageSrc) {
         this._name = name;
         this._HP = HP;
+        this._baseHP = HP;
         this._AP = AP;
+        this._baseAP = AP;
         this._CAP = CAP;
-        this._imageSrc = imageSrc
+        this._baseCAP = CAP;
+        this._imageSrc = imageSrc;
     }
 
     get name() {
@@ -29,6 +32,10 @@ class Character {
         this._HP = newHP;
     }
 
+    get baseHP() {
+        return this._baseHP;
+    }
+
     get AP() {
         return this._AP;
     }
@@ -37,12 +44,20 @@ class Character {
         this._AP = newAP;
     }
 
+    get baseAP() {
+        return this._baseAP;
+    }
+
     get CAP() {
         return this._CAP;
     }
 
     set CAP(newCAP) {
         this._CAP = newCAP;
+    }
+
+    get baseCAP() {
+        return this._baseCAP;
     }
 
     get imageSrc() {
@@ -58,8 +73,8 @@ class Character {
     }
 
     boostAP() {
-        this.AP = Math.round(this.AP *= 1.5);
-        console.log("this.AP", this.AP);
+        this.AP = Math.floor(this.AP * 1.5);
+        console.log("this.AP after boost", this.AP);
     }
 
     loseHP(opp) {
@@ -69,18 +84,22 @@ class Character {
             this.HP -= opp.AP;
         }
     }
+
+    reset() {
+        this.HP = this.baseHP;
+        this.AP = this.baseAP;
+        this.CAP = this.baseCAP;
+    }
 }
 
-var slime = new Character("Slime", 10, 2, 3, "assets/media/images/slime.gif");
+var slime = new Character("Slime", 20, 3, 4, "assets/media/images/slime.gif");
 slime.pushInCharArr();
-var tongueRat = new Character("TongueRat", 12, 3, 2, "assets/media/images/tonguerat.gif");
+var tongueRat = new Character("TongueRat", 20, 4, 3, "assets/media/images/tonguerat.gif");
 tongueRat.pushInCharArr();
-var florajay = new Character("Florajay", 12, 4, 2, "assets/media/images/florajay.gif");
+var florajay = new Character("Florajay", 24, 4, 2, "assets/media/images/florajay.gif");
 florajay.pushInCharArr();
-var lipsy = new Character("Lipsy", 10, 2, 4, "assets/media/images/lipsy.gif")
+var lipsy = new Character("Lipsy", 24, 2, 4, "assets/media/images/lipsy.gif")
 lipsy.pushInCharArr();
-
-console.log(charArr)
 
 var userChar;
 var opponentChar;
@@ -130,8 +149,6 @@ $("#start-game").on("click", function() {
             "data-name": charArr[i].name,
             "data-index": i,
         });
-        // charCard.attr("id", charArr[i].name[0].toLowerCase() + charArr[i].name.slice(1) + "Card");
-        console.log(charCard);
 
         // Append charCardHeader, charCardStats and unique ID to each card.
         charCard.append(charCardHeader);
@@ -145,10 +162,14 @@ $("#start-game").on("click", function() {
     $(".char-card").on("click", function() {
 
         // Execute following code only if character is not yet selected.
-        if (!charSelected) {
+        if (!isCharSelected) {
             // Hide character select window and show battle window.
             $("#character-select").hide();
             $("#battle-window").show();
+
+            // Hide the #new-game button and display the #attack button if this is not the first round of the game.
+            $("#new-game").hide();
+            $("#attack-button").show();
             
             // userChar is assigned user's selected character.
             userChar = charArr[$(this).attr("data-index")];
@@ -156,18 +177,15 @@ $("#start-game").on("click", function() {
 
             // Create array of opponents...
             opponentsArr = charArr.filter(char => char !== userChar);
-            console.log("opponentsArr", opponentsArr);
 
             // ...and selected first opponent to combat user.
             opponentChar = opponentsArr[0];
 
             // Display opponent in #opponent display.
             console.log("opponentChar", opponentChar);
-            // $("#opponent").html(this);
 
             // Display battle "draws near" message in #battle-message display.
             $("#battle-message").append("A " + opponentChar.name + " draws near!");
-            console.log(charSelected, $("#battle-message"));
 
             // Populate #opponent-image display with opponent sprite.
             $("#opponent-image").html("<img />").attr("src", opponentChar.imageSrc);
@@ -178,43 +196,82 @@ $("#start-game").on("click", function() {
 
             // Populate #opponent-hp display with opponent's remaining HP.
             $("#opponent-hp").append(opponentChar.HP);
-            console.log("opponentChar.HP", opponentChar.HP);
+            // console.log("opponentChar.HP", opponentChar.HP);
 
             // Populate #user-name display with user's name.
             $("#user-name").append(userChar.name);
-            console.log("userChar.name", userChar.name);
+            // console.log("userChar.name", userChar.name);
 
             // Populate #user-HP display with user's remaining HP.
             $("#user-hp").append(userChar.HP);
-            console.log("userChar.HP", userChar.HP);
+            // console.log("userChar.HP", userChar.HP);
 
-            // Switch charSelected to true to prevent repetition of previous code.
-            charSelected = true;
+            // Switch isCharSelected to true to prevent repetition of previous code.
+            isCharSelected = true;
+        }
+    })
+
+    // Upon clicking #attack-button button...
+    $("#attack-button").on("click", function() {
+        // ...userChar loses HP...
+        userChar.loseHP(opponentChar);
+        $("#user-hp").html(userChar.HP);
+
+        // ...opponentChar loses HP...
+        opponentChar.loseHP(userChar);
+        $("#opponent-hp").html(opponentChar.HP);
+
+        // ...and userChar sees a boost in AP.
+        userChar.boostAP();
+        console.log("userChar.AP", userChar.AP);
+
+        // If there are still opponent characters left to defeat after the currect character, and the current character's HP drops below 0, then switch to next opponentChar.
+        if (
+            (opponentsArr[1])
+            &&
+            (opponentChar.HP <= 0)
+            ) {
+            opponentsArr.shift();
+
+            opponentChar = Object.create(opponentsArr[0]);
+
+            // Display battle "draws near" message in #battle-message display.
+            $("#battle-message").html("A " + opponentChar.name + " draws near!");
+
+            // Populate #opponent-image display with opponent sprite.
+            $("#opponent-image").html("<img />").attr("src", opponentChar.imageSrc);
+
+            // Populate #opponent-name display with opponent's name.
+            $("#opponent-name").html(opponentChar.name);
+            $("#opponent-name").append("'s");
+
+            // Populate #opponent-hp display with opponent's remaining HP.
+            $("#opponent-hp").html(opponentChar.HP);
+        } 
+
+        // Otherwise, display a "You win!" message in #battle message and offer to start a new game.
+        else if (
+            (!opponentsArr[1])
+            &&
+            (opponentChar.HP <= 0)
+            ) {
+            $("#opponent-hp").html("0");
+            $("#attack-button").hide();
+            $("#new-game").show();
+            $("#battle-message").html("You win!");
+            isPlaying = false;
+        }
+    })
+
+    $("#new-game").on("click", function() {
+        $("#battle-window").hide();
+        $("#character-select").show();
+        $(".to-empty").empty();
+
+        for (var i = 0; i < charArr.length; i++) {
+            charArr[i].reset();
         }
 
-        $("#attack-button").on("click", function() {
-            userChar.loseHP(opponentChar);
-            $("#user-hp").html(userChar.HP);
-            console.log("userChar.HP", userChar.HP);
-
-            opponentChar.loseHP(userChar);
-            console.log("opponentChar.HP", opponentChar.HP);
-            $("#opponent-hp").html(opponentChar.HP);
-
-            userChar.boostAP();
-            console.log("userChar.AP", userChar.AP);
-        })
+        isCharSelected = false;
     })
 })
-
-
-
-    // One other character is send to defender area
-
-// On attack click, opponent HP drops
-
-    // Once opponent HP drops to 0, opponent loses and next character becomes opponent
-
-    // If player character HP drops to 0, player loses
-
-//

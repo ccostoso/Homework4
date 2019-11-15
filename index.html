@@ -41,27 +41,29 @@
 
         <!-- Battle Window -->
         <main id="battle-window" class="container card text-center text-white my-auto">
-            <div id="battle-message" class="card-header">
+            <div id="battle-message" class="card-header to-empty">
                 <!-- To be filled with jQuery. -->
             </div>
 
             <section id="opponent" class="card-body">
                 <!-- #opponent-image, #opponent-name and #opponent-hp to be populated with jQuery. -->
                 <img id="opponent-image" class="char-sprite" />
-                <p><span id="opponent-name"></span> HP: <span id="opponent-hp"></span></p>
+                <p><span id="opponent-name" class="to-empty"></span> HP: <span id="opponent-hp" class="to-empty"></span></p>
                 <br>
 
                 <!-- Attack button -->
                 <button id="attack-button" class="btn btn-success">
                     Attack
                 </button>
+                <button id="new-game" class="btn btn-success">
+                    New Game
+                </button>
                 <br>
                 <br>
                 <br>
-                
-                <!-- #user-name and #user-hp to be populated with jQuery. -->
-                <p><span id="user-name"></span> HP: <span id="user-hp"></span></p>
 
+                <!-- #user-name and #user-hp to be populated with jQuery. -->
+                <p><span id="user-name" class="to-empty"></span> HP: <span id="user-hp" class="to-empty"></span></p>
             </section>
         </main>
 

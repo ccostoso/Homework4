@@ -64,7 +64,8 @@ nav {
 
 /* Battle Window Styles */
 
-#battle-window {
+#battle-window,
+#new-game {
     display: none;
 }
 
