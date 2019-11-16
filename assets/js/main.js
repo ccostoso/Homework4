@@ -213,17 +213,26 @@ $("#start-game").on("click", function() {
 
     // Upon clicking #attack-button button...
     $("#attack-button").on("click", function() {
-        // ...userChar loses HP...
-        userChar.loseHP(opponentChar);
-        $("#user-hp").html(userChar.HP);
-
         // ...opponentChar loses HP...
         opponentChar.loseHP(userChar);
         $("#opponent-hp").html(opponentChar.HP);
 
+        // ...userChar loses HP if opponent is not already defeated...
+        if (opponentChar.HP > 0) {
+            userChar.loseHP(opponentChar);
+            $("#user-hp").html(userChar.HP);
+        }
+
         // ...and userChar sees a boost in AP.
         userChar.boostAP();
         console.log("userChar.AP", userChar.AP);
+
+        // If user HP drops to 0, replace #attack-button with #game-over button.
+        if (userChar.HP <= 0) {
+            $("#user-hp").html("0")
+            $("#attack-button").hide();
+            $("#game-over").show();
+        }
 
         // If there are still opponent characters left to defeat after the currect character, and the current character's HP drops below 0, then switch to next opponentChar.
         if (
@@ -261,6 +270,18 @@ $("#start-game").on("click", function() {
             $("#battle-message").html("You win!");
             isPlaying = false;
         }
+    })
+
+    $("#game-over").on("click", function() {
+        $("#battle-window").hide();
+        $("#character-select").show();
+        $(".to-empty").empty();
+
+        for (var i = 0; i < charArr.length; i++) {
+            charArr[i].reset();
+        }
+
+        isCharSelected = false;
     })
 
     $("#new-game").on("click", function() {
