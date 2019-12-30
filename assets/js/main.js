@@ -3,7 +3,7 @@ var isPlaying;
 var isCharSelected;
 var charArr = [];
 
-import Character from './character';
+// import Character from './character';
 
 // // Create character objects
 class Character {
