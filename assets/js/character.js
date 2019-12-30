@@ -1,5 +1,5 @@
 // Create character objects
-class Character {
+export class Character {
     constructor(name, HP, AP, CAP, imageSrc) {
         this._name = name;
         this._HP = HP;
@@ -86,5 +86,3 @@ class Character {
         this.CAP = this.baseCAP;
     }
 }
-
-export {Character};
