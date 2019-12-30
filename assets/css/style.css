@@ -44,10 +44,6 @@ nav {
 
 /* Character Select Window Styles */
 
-#character-select {
-    display: none;
-}
-
 .card {
     padding: 0;
     background-color: rgba(0, 0, 0, 0);
@@ -64,6 +60,8 @@ nav {
 
 /* Battle Window Styles */
 
+#character-select,
+#opponent-select,
 #battle-window,
 #new-game,
 #game-over {
