@@ -1,5 +1,5 @@
 // Create character objects
-export class Character {
+export default class Character {
     constructor(name, HP, AP, CAP, imageSrc) {
         this._name = name;
         this._HP = HP;
