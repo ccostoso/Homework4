@@ -1,5 +1,6 @@
 // Create character array
 var charArr = [];
+var userChar;
 
 // Create character objects
 class Character {
@@ -90,4 +91,4 @@ class Character {
     }
 }
 
-export { charArr, Character };
+export { charArr, userChar, Character };

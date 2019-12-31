@@ -2,7 +2,7 @@
 var isPlaying;
 var isCharSelected;
 
-import { charArr, Character } from './character.js';
+import { charArr, userChar, Character } from './character.js';
 
 var slime = new Character("Slime", 20, 3, 4, "assets/media/images/slime.gif");
 slime.pushInCharArr();
@@ -13,7 +13,6 @@ florajay.pushInCharArr();
 var lipsy = new Character("Lipsy", 24, 2, 8, "assets/media/images/lipsy.gif")
 lipsy.pushInCharArr();
 
-var userChar;
 var opponentChar;
 var opponentsArr = [];
 
