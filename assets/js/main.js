@@ -4,13 +4,13 @@ let isCharSelected;
 
 import { charArr, userChar, Character } from './character.js';
 
-const slime = new Character("Slime", 20, 3, 4, "assets/media/images/slime.gif");
+let slime = new Character("Slime", 20, 3, 4, "assets/media/images/slime.gif");
 slime.pushInCharArr();
-const tongueRat = new Character("TongueRat", 20, 4, 3, "assets/media/images/tonguerat.gif");
+let tongueRat = new Character("TongueRat", 20, 4, 3, "assets/media/images/tonguerat.gif");
 tongueRat.pushInCharArr();
-const florajay = new Character("Florajay", 24, 4, 5, "assets/media/images/florajay.gif");
+let florajay = new Character("Florajay", 24, 4, 5, "assets/media/images/florajay.gif");
 florajay.pushInCharArr();
-const lipsy = new Character("Lipsy", 24, 2, 8, "assets/media/images/lipsy.gif")
+let lipsy = new Character("Lipsy", 24, 2, 8, "assets/media/images/lipsy.gif")
 lipsy.pushInCharArr();
 
 let opponentChar;
