@@ -1,6 +1,6 @@
 // Create character array
-var charArr = [];
-var userChar;
+let charArr = [];
+let userChar;
 
 // Create character objects
 class Character {

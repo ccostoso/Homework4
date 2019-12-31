@@ -1,20 +1,20 @@
 // Create game variables
-var isPlaying;
-var isCharSelected;
+let isPlaying;
+let isCharSelected;
 
 import { charArr, userChar, Character } from './character.js';
 
-var slime = new Character("Slime", 20, 3, 4, "assets/media/images/slime.gif");
+const slime = new Character("Slime", 20, 3, 4, "assets/media/images/slime.gif");
 slime.pushInCharArr();
-var tongueRat = new Character("TongueRat", 20, 4, 3, "assets/media/images/tonguerat.gif");
+const tongueRat = new Character("TongueRat", 20, 4, 3, "assets/media/images/tonguerat.gif");
 tongueRat.pushInCharArr();
-var florajay = new Character("Florajay", 24, 4, 5, "assets/media/images/florajay.gif");
+const florajay = new Character("Florajay", 24, 4, 5, "assets/media/images/florajay.gif");
 florajay.pushInCharArr();
-var lipsy = new Character("Lipsy", 24, 2, 8, "assets/media/images/lipsy.gif")
+const lipsy = new Character("Lipsy", 24, 2, 8, "assets/media/images/lipsy.gif")
 lipsy.pushInCharArr();
 
-var opponentChar;
-var opponentsArr = [];
+let opponentChar;
+let opponentsArr = [];
 
 // Create onclick function for selecting character
 
@@ -28,11 +28,11 @@ $("#start-game").on("click", function() {
     // ***********************************************************
     $("#character-select").show();
 
-    for (var i = 0; i < charArr.length; i++) {
-        var charCard = $("<div>");
-        var charCardHeader = $("<div>");
-        var charCardStats = $("<div>");
-        var charCardImageSrc = charArr[i].imageSrc;
+    for (let i = 0; i < charArr.length; i++) {
+        let charCard = $("<div>");
+        let charCardHeader = $("<div>");
+        let charCardStats = $("<div>");
+        let charCardImageSrc = charArr[i].imageSrc;
         
         // Style character card for #user-char-row display.
         charCard.addClass("char-card card col-md-3 col-xs-6");
@@ -43,7 +43,7 @@ $("#start-game").on("click", function() {
         charCardHeader.text(charArr[i].name);
 
         // Add attributes to charCardImageTag.
-        var charCardImageTag = $("<img />").attr({
+        let charCardImageTag = $("<img />").attr({
             "src": charCardImageSrc,
             "class": "char-sprite"
         });
@@ -95,10 +95,10 @@ $("#start-game").on("click", function() {
 
         // ...and populate #opponent-select window with cards of each opponent.
         $.each(opponentsArr, function(i, ele) {
-            var oppCharCard = $("<div>");
-            var oppCharCardHeader = $("<div>");
-            var oppCharCardStats = $("<div>");
-            var oppCharCardImageSrc = ele.imageSrc;
+            let oppCharCard = $("<div>");
+            let oppCharCardHeader = $("<div>");
+            let oppCharCardStats = $("<div>");
+            let oppCharCardImageSrc = ele.imageSrc;
 
             // Style character card for #user-char-row display.
             oppCharCard.addClass("opp-char-card card col-md-3 col-xs-6");
@@ -109,7 +109,7 @@ $("#start-game").on("click", function() {
             oppCharCardHeader.text(ele.name);
 
             // Add attributes to oppCharCardImageTag.
-            var oppCharCardImageTag = $("<img />").attr({
+            let oppCharCardImageTag = $("<img />").attr({
                 "src": oppCharCardImageSrc,
                 "class": "char-sprite"
             });
@@ -255,7 +255,7 @@ $("#start-game").on("click", function() {
         $(".to-empty").empty();
         opponentsArr = [];
 
-        for (var i = 0; i < charArr.length; i++) {
+        for (let i = 0; i < charArr.length; i++) {
             charArr[i].reset();
         }
 
@@ -270,7 +270,7 @@ $("#start-game").on("click", function() {
         $(".to-empty").empty();
         opponentsArr = [];
 
-        for (var i = 0; i < charArr.length; i++) {
+        for (let i = 0; i < charArr.length; i++) {
             charArr[i].reset();
         }
 
