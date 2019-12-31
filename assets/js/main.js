@@ -87,6 +87,7 @@ $("#start-game").on("click", function() {
         $("#attack-button").show();
         
         // userChar is assigned user's selected character.
+        charArr[$(this).attr("data-index")].flipIsUserChar();
         userChar = charArr[$(this).attr("data-index")];
         console.log("userChar", userChar);
 
@@ -218,7 +219,7 @@ $("#start-game").on("click", function() {
                 console.log(opponentsArr);
                 
                 opponentChar = Object.create(opponentsArr[0]);
-                console.log("m", opponentsArr);
+                console.log("opponentsArr", opponentsArr);
 
                 // Display battle "draws near" message in #battle-message display.
                 $("#battle-message").html("A " + opponentChar.name + " draws near!");

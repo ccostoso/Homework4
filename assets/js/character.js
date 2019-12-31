@@ -12,6 +12,7 @@ class Character {
         this._CAP = CAP;
         this._baseCAP = CAP;
         this._imageSrc = imageSrc;
+        this._isUserChar = false;
     }
 
     get name() {
@@ -66,6 +67,14 @@ class Character {
         this._imageSrc = newImageSrc;
     }
 
+    get isUserChar() {
+        return this._isUserChar;
+    }
+    
+    flipIsUserChar() {
+        this.isUserChar === !this.isUserChar;
+    }
+
     pushInCharArr() {
         charArr.push(this);
     }
@@ -76,7 +85,7 @@ class Character {
     }
 
     loseHP(opp) {
-        if (this === userChar) {
+        if (this.isUserChar) {
             this.HP -= opp.CAP;
         } else {
             this.HP -= opp.AP;
