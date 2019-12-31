@@ -1,5 +1,8 @@
+// Create character array
+var charArr = [];
+
 // Create character objects
-export default class Character {
+class Character {
     constructor(name, HP, AP, CAP, imageSrc) {
         this._name = name;
         this._HP = HP;
@@ -85,4 +88,9 @@ export default class Character {
         this.AP = this.baseAP;
         this.CAP = this.baseCAP;
     }
+}
+
+module.exports = {
+    charArr: charArr,
+    Character: Character
 }

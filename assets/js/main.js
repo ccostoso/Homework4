@@ -1,9 +1,9 @@
 // Create game variables
 var isPlaying;
 var isCharSelected;
-var charArr = [];
+var charArr = require('./character.js');
+var Character = require('.character.js');
 
-import Character from './character.js';
 
 // // Create character objects
 // class Character {
