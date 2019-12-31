@@ -90,7 +90,4 @@ class Character {
     }
 }
 
-module.exports = {
-    charArr: charArr,
-    Character: Character
-}
+export { charArr, Character };
