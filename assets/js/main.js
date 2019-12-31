@@ -1,8 +1,9 @@
 // Create game variables
 let isPlaying;
 let isCharSelected;
+let userChar;
 
-import { charArr, userChar, Character } from './character.js';
+import { charArr, Character } from './character.js';
 
 let slime = new Character("Slime", 20, 3, 4, "assets/media/images/slime.gif");
 slime.pushInCharArr();

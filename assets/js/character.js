@@ -1,6 +1,5 @@
 // Create character array
 let charArr = [];
-let userChar;
 
 // Create character objects
 class Character {
@@ -91,4 +90,4 @@ class Character {
     }
 }
 
-export { charArr, userChar, Character };
+export { charArr, Character };
